@@ -6,23 +6,22 @@ use App\Http\Controllers\RendisController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiagnosisController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\WebSettingController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Dashboard\Management\ActivityController;
 use App\Http\Controllers\Dashboard\Management\RoleController;
 use App\Http\Controllers\Dashboard\Management\UserController;
+use App\Http\Controllers\Dashboard\Management\ActivityController;
 
 Route::get('/', function () {
-    return Auth::check() ? redirect()->route('dashboard') : redirect()->route('login');
+    return view('home.index');
 });
 
-Route::get('/tes', function () {
-    return view('tes');
-});
-
+Route::post('/diagnose', [DiagnosisController::class, 'diagnose'])->name('diagnose');
+Route::get('diagnose', [DiagnosisController::class, 'index'])->name("diagnose.index");
 
 Route::get('lang', [LanguageController::class, 'change'])->name("change.lang");
 
